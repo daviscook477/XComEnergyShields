@@ -19,16 +19,22 @@ function UpdateTemplates()
 	local X2ItemTemplateManager itemMan;
 	local X2AbilityTemplateManager abilityMan;
 	local XESItem_UtilityEnergyShieldItem xesI;
-	local XESAbility_XComEnergyshield xesA;
+	local XESItem_UtilityEnergyShieldItemPersonal xesIP;
+	local XESAbility_XComEnergyShield xesA;
+	local XESAbility_XComEnergyShieldPersonal xesAP;
 
 	xesI = new class'XESItem_UtilityEnergyShieldItem';
+	xesIP = new class'XESItem_UtilityEnergyShieldItemPersonal';
 	xesA = new class'XESAbility_XComEnergyShield';
+	xesAP = new class'XESAbility_XComEnergyShieldPersonal';
 
 	abilityMan = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	abilityMan.AddAbilityTemplate(X2AbilityTemplate(xesA.CreateXComEnergyShieldAbility()));
+	abilityMan.AddAbilityTemplate(X2AbilityTemplate(xesAP.CreateXComEnergyShieldPersonalAbility()));
 
 	itemMan = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
 	itemMan.AddItemTemplate(X2ItemTemplate(xesI.CreateEnergyShield()));
+	itemMan.AddItemTemplate(X2ItemTemplate(xesIP.CreateEnergyShieldPersonal()));
 }
  
 // This event is triggered after a screen receives focus

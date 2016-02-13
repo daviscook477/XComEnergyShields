@@ -36,7 +36,13 @@
     <Content Include="Src\XComEnergyShields\Classes\XESAbility_XComEnergyShield.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\XComEnergyShields\Classes\XESAbility_XComEnergyShieldPersonal.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\XComEnergyShields\Classes\XESItem_UtilityEnergyShieldItem.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\XComEnergyShields\Classes\XESItem_UtilityEnergyShieldItemPersonal.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\XComEnergyShields\Classes\XES_UIScreenListener.uc">
