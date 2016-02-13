@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Guid>38417c7e-fc65-4a89-8369-29e5b3042555</Guid>
+    <Name>XCom Energy Shields</Name>
+    <Description>Have you ever been extremely annoyed by the Advent Shiledbearer's and their damn energy shields! Well, sorrow no longer because now you can have energy shields too!</Description>
+    <SteamPublishID>0</SteamPublishID>
+    <AssemblyName>XCom Energy Shields</AssemblyName>
+    <RootNamespace>XCom Energy Shields</RootNamespace>
+    <ProjectGuid>{80afd34c-f536-4d64-9423-b645d45de66b}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Content\" />
+    <Folder Include="Localization\" />
+    <Folder Include="Images" />
+    <Folder Include="Src\" />
+    <Folder Include="Src\XComGame\" />
+    <Folder Include="Src\XComGame\Classes\" />
+    <Folder Include="Src\XComEnergyShields\" />
+    <Folder Include="Src\XComEnergyShields\Classes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\XComEnergyShield.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModPreview.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ReadMe.txt" />
+    <Content Include="Config\XComEditor.ini" />
+    <Content Include="Config\XComEngine.ini" />
+    <Content Include="Config\XComGame.ini" />
+    <Content Include="Localization\XComGame.int" />
+    <Content Include="Src\XComEnergyShields\Classes\X2DownloadableContentInfo_XComEnergyShields.uc" />
+    <Content Include="Src\XComEnergyShields\Classes\XESAbility_XComEnergyShield.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\XComEnergyShields\Classes\XESItem_UtilityEnergyShieldItem.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\XComEnergyShields\Classes\XES_UIScreenListener.uc">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildLocalExtensionPath)\XCOM2.targets" />
+</Project>
