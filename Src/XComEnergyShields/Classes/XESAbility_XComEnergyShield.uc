@@ -13,13 +13,13 @@ var config int ENERGY_SHIELD_HP;
 // Most of this is carbon copied from the game file 'X2Ability_AdventShiledbearer.uc' I've made note of the changes.
 
 // Functions are non-static in order to access config data.
-function X2DataTemplate CreateXComEnergyShieldAbility()
+function X2AbilityTemplate CreateXComEnergyShieldAbility()
 {
 	local X2AbilityTemplate Template;
 	local X2AbilityCost_ActionPoints ActionPointCost;
 	local X2AbilityCharges Charges;
 	local X2AbilityCost_Charges ChargeCost;
-	local X2AbilityCooldown_LocalAndGlobal Cooldown;
+	local X2AbilityCooldown Cooldown;
 	local X2Condition_UnitProperty UnitPropertyCondition;
 	local X2AbilityTrigger_PlayerInput InputTrigger;
 	local X2Effect_PersistentStatChange ShieldedEffect;
@@ -46,9 +46,8 @@ function X2DataTemplate CreateXComEnergyShieldAbility()
 	ChargeCost.NumCharges = 1;
 	Template.AbilityCosts.AddItem(ChargeCost);
 
-	Cooldown = new class'X2AbilityCooldown_LocalAndGlobal';
+	Cooldown = new class'X2AbilityCooldown';
 	Cooldown.iNumTurns = ENERGY_SHIELD_COOLDOWN;
-	Cooldown.NumGlobalTurns = ENERGY_SHIELD_GLOBAL_COOLDOWN;
 	Template.AbilityCooldown = Cooldown;
 
 	//Can't use while dead
@@ -83,8 +82,7 @@ function X2DataTemplate CreateXComEnergyShieldAbility()
 	Template.AddMultiTargetEffect(ShieldedEffect);
 
 	Template.BuildNewGameStateFn = TypicalAbility_BuildGameState;
-	Template.BuildVisualizationFn = Shielded_BuildVisualization;
-	Template.CinescriptCameraType = "AdvShieldBearer_EnergyShieldArmor";
+	Template.BuildVisualizationFn = TypicalAbility_BuildVisualization;
 	
 	return Template;
 }
@@ -111,30 +109,4 @@ simulated function OnShieldRemoved_BuildVisualization(XComGameState VisualizeGam
 		SoundAndFlyOver = X2Action_PlaySoundAndFlyOver(class'X2Action_PlaySoundAndFlyOver'.static.AddToVisualizationTrack(BuildTrack, VisualizeGameState.GetContext()));
 		SoundAndFlyOver.SetSoundAndFlyOverParameters(None, class'XLocalizedData'.default.ShieldRemovedMsg, '', eColor_Bad, , 0.75, true);
 	}
-}
-
-simulated function Shielded_BuildVisualization(XComGameState VisualizeGameState, out array<VisualizationTrack> OutVisualizationTracks)
-{
-	local XComGameStateHistory History;
-	local XComGameStateContext_Ability  Context;
-	local StateObjectReference InteractingUnitRef;
-	local VisualizationTrack EmptyTrack;
-	local VisualizationTrack BuildTrack;
-	local X2Action_PlayAnimation PlayAnimationAction;
-
-	History = `XCOMHISTORY;
-
-	Context = XComGameStateContext_Ability(VisualizeGameState.GetContext());
-	InteractingUnitRef = Context.InputContext.SourceObject;
-
-	//Configure the visualization track for the shooter
-	//****************************************************************************************
-	BuildTrack = EmptyTrack;
-	BuildTrack.StateObject_OldState = History.GetGameStateForObjectID(InteractingUnitRef.ObjectID, eReturnType_Reference, VisualizeGameState.HistoryIndex - 1);
-	BuildTrack.StateObject_NewState = VisualizeGameState.GetGameStateForObjectID(InteractingUnitRef.ObjectID);
-	BuildTrack.TrackActor = History.GetVisualizer(InteractingUnitRef.ObjectID);
-
-	PlayAnimationAction = X2Action_PlayAnimation(class'X2Action_PlayAnimation'.static.AddToVisualizationTrack(BuildTrack, Context));
-	//PlayAnimationAction.Params.AnimName = 'Pose';//'HL_EnergyShield'; // TODO: change this animation to something that XCOM soldiers can actually do.
-	//OutVisualizationTracks.AddItem(BuildTrack);
 }
